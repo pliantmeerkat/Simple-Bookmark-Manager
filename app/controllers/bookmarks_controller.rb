@@ -2,7 +2,7 @@
 
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: %i[show edit update destroy]
-
+  before_action :authenticate_user!
   # GET /bookmarks
   # GET /bookmarks.json
   def index
@@ -66,6 +66,10 @@ class BookmarksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_bookmark
     @bookmark = Bookmark.find(params[:id])
+    unless @bookmark == current_user.bookmarks.where(id: params[:id]).first
+      flash[:alert] = 'Bookmark not found'
+      redirect_to_root_url
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

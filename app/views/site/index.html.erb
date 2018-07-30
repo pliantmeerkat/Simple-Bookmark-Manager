@@ -1,0 +1,17 @@
+<h1>Site#index</h1>
+<h2> Latest Bookmarks</h2>
+<table style="width: 100%">
+  <thread>
+    <tr>
+      <th>Url</th>
+    </tr>
+  </thread>
+  <tbody>
+  <% @bookmarks.each do |b| %>
+    <tr>
+      <td><%= link_to b.title, b.url %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<p>Find me in app/views/site/index.html.erb</p>
